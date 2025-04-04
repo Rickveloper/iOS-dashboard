@@ -1,6 +1,6 @@
 # iOS Dashboard
 
-![Banner](assets/banner.png)
+![Banner](./6EA7E02B-B93F-46EB-A220-F78C3BD3616C.png)
 
 [![Made with iPhone](https://img.shields.io/badge/built%20on-iPhone-blue?logo=apple)](https://github.com/Rickveloper/iOS-dashboard)
 [![Website](https://img.shields.io/badge/live-demo-brightgreen?logo=githubpages&style=flat)](https://rickveloper.github.io/iOS-dashboard)
