@@ -1,0 +1,47 @@
+/* style.css */
+body {
+  font-family: 'Courier New', monospace;
+  background-color: #111;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.container {
+  max-width: 90%;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: #f5c518;
+}
+
+.time, .date, .vibe {
+  font-size: 1.5em;
+  margin: 5px 0;
+}
+
+.quick-links {
+  margin-top: 20px;
+}
+
+.quick-links a {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.quick-links a:hover {
+  background-color: #555;
+}
