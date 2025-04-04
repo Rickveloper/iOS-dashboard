@@ -35,14 +35,18 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  max-width: 90%;
+  max-width: 95%;
 }
 
 .quick-links a {
-  flex: 1 1 auto;
+  background-color: #333;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
   min-width: 100px;
-  max-width: 160px;
   text-align: center;
+  flex: 1 1 auto;
 }
 
 .quick-links a:hover {
