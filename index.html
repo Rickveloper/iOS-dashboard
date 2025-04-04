@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>iOS Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="container">
@@ -27,9 +26,19 @@
     <div class="quick-links">
       <a href="https://github.com" target="_blank">GitHub</a>
       <a href="shortcuts://">Shortcuts</a>
-      <a href="tel://1234567890">Call Me</a>
       <a href="notes://">Notes</a>
       <a href="https://github.com/Rickveloper/iOS-weather-widget" target="_blank">Weather Widget Repo</a>
+    </div>
+
+    <div class="spotify-block">
+      <button id="spotify-login" onclick="startSpotifyAuth()">Login to Spotify</button>
+      <div id="spotify-nowplaying" class="hidden">
+        <img id="album-art" src="" alt="Album Art">
+        <div id="track-info">
+          <div id="song-name">Song</div>
+          <div id="artist-name">Artist</div>
+        </div>
+      </div>
     </div>
 
     <div class="theme-toggle">
