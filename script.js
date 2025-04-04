@@ -1,77 +1,28 @@
-// script.js
+async function getWeather() {
+  try {
+    // Get user location
+    const position = await new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject)
+    );
 
-function updateTime() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, "0");
-  const minutes = now.getMinutes().toString().padStart(2, "0");
+    const lat = position.coords.latitude.toFixed(4);
+    const lon = position.coords.longitude.toFixed(4);
 
-  document.getElementById("time").textContent = `${hours}:${minutes}`;
-  document.getElementById("date").textContent = now.toDateString();
-  document.getElementById("vibe").textContent = `Vibe Check: ${getVibe(now)}`;
-}
+    // Get weather data
+    const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode&temperature_unit=fahrenheit`);
+    const weatherData = await weatherRes.json();
 
-function getVibe(now) {
-  const hour = now.getHours();
-  if (hour < 6) return "Midnight Grind";
-  if (hour < 10) return "Coffee Needed";
-  if (hour < 14) return "Dialed In";
-  if (hour < 18) return "Cruisin'";
-  if (hour < 22) return "Chillin'";
-  return "Sleep Mode";
-}
+    const temp = Math.round(weatherData.current.temperature_2m);
 
-function saveNote() {
-  const note = document.getElementById("note").value;
-  localStorage.setItem("quickNote", note);
-  showSavedNote();
-}
+    // Get city/state
+    const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+    const geoData = await geoRes.json();
+    const location = geoData.address.city || geoData.address.town || geoData.address.state || "your area";
 
-function showSavedNote() {
-  const note = localStorage.getItem("quickNote");
-  if (note) {
-    document.getElementById("saved-note").textContent = `Saved Note: ${note}`;
+    // Update the DOM
+    document.getElementById("weather").textContent = `Weather: ${temp}°F in ${location}`;
+  } catch (err) {
+    console.error("Weather fetch failed:", err);
+    document.getElementById("weather").textContent = "Weather: Unavailable";
   }
 }
-
-function toggleTheme() {
-  const body = document.body;
-  if (body.classList.contains("light")) {
-    body.classList.remove("light");
-    body.classList.add("vapor");
-  } else if (body.classList.contains("vapor")) {
-    body.classList.remove("vapor");
-  } else {
-    body.classList.add("light");
-  }
-}
-
-function getBattery() {
-  if ("getBattery" in navigator) {
-    navigator.getBattery().then(battery => {
-      const percent = Math.round(battery.level * 100);
-      document.getElementById("battery").textContent = `Battery: ${percent}%`;
-    });
-  }
-}
-
-function getWeather() {
-  const apiKey = "YOUR_API_KEY_HERE"; // <-- Replace with your OpenWeatherMap API key
-  const city = "Boston"; // You can make this dynamic if you want
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`)
-    .then(response => response.json())
-    .then(data => {
-      const temp = Math.round(data.main.temp);
-      const desc = data.weather[0].main;
-      document.getElementById("weather").textContent = `Weather: ${temp}°F, ${desc}`;
-    })
-    .catch(() => {
-      document.getElementById("weather").textContent = "Weather: Error";
-    });
-}
-
-// Initialize dashboard
-updateTime();
-showSavedNote();
-getBattery();
-getWeather();
-setInterval(updateTime, 1000);
