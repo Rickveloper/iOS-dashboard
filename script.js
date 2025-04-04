@@ -46,9 +46,15 @@ function toggleTheme() {
 function getBattery() {
   if ("getBattery" in navigator) {
     navigator.getBattery().then(battery => {
-      const percent = Math.round(battery.level * 100);
-      document.getElementById("battery").textContent = `Battery: ${percent}%`;
+      const update = () => {
+        const percent = Math.round(battery.level * 100);
+        document.getElementById("battery").textContent = `Battery: ${percent}%`;
+      };
+      update();
+      battery.addEventListener('levelchange', update);
     });
+  } else {
+    document.getElementById("battery").textContent = "Battery: N/A on this browser";
   }
 }
 
