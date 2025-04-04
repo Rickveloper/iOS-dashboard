@@ -4,25 +4,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My iPhone Dashboard</title>
+  <title>iOS Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="container">
-    <h1>Dashboard</h1>
-    <div class="time" id="time">--:--</div>
-    <div class="date" id="date">-- -- ----</div>
-    <div class="vibe" id="vibe">Loading vibes...</div>
+    <h1 id="title">Dashboard</h1>
+
+    <div class="info-block">
+      <div id="time">--:--</div>
+      <div id="date">-- -- ----</div>
+      <div id="vibe">Vibe Check: Loading...</div>
+      <div id="battery">Battery: --%</div>
+      <div id="weather">Weather: Loading...</div>
+    </div>
+
+    <textarea id="note" placeholder="Quick note..."></textarea>
+    <button onclick="saveNote()">Save Note</button>
+    <div id="saved-note"></div>
 
     <div class="quick-links">
       <a href="https://github.com" target="_blank">GitHub</a>
       <a href="shortcuts://">Shortcuts</a>
       <a href="tel://1234567890">Call Me</a>
       <a href="notes://">Notes</a>
+      <a href="https://github.com/Rickveloper/iOS-weather-widget" target="_blank">Weather Widget Repo</a>
+    </div>
+
+    <div class="theme-toggle">
+      <button onclick="toggleTheme()">Toggle Theme</button>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
