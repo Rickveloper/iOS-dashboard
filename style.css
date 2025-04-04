@@ -39,12 +39,10 @@ h1 {
 }
 
 .quick-links a {
-  background-color: #333;
-  padding: 10px 15px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #fff;
-  transition: background-color 0.2s ease;
+  flex: 1 1 auto;
+  min-width: 100px;
+  max-width: 160px;
+  text-align: center;
 }
 
 .quick-links a:hover {
