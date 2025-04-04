@@ -44,17 +44,21 @@ function toggleTheme() {
 }
 
 function getBattery() {
-  if ("getBattery" in navigator) {
-    navigator.getBattery().then(battery => {
-      const update = () => {
-        const percent = Math.round(battery.level * 100);
-        document.getElementById("battery").textContent = `Battery: ${percent}%`;
-      };
-      update();
-      battery.addEventListener('levelchange', update);
-    });
-  } else {
-    document.getElementById("battery").textContent = "Battery: N/A on this browser";
+  try {
+    if (navigator.getBattery) {
+      navigator.getBattery().then(battery => {
+        const updateBattery = () => {
+          const percent = Math.round(battery.level * 100);
+          document.getElementById("battery").textContent = `Battery: ${percent}%`;
+        };
+        updateBattery();
+        battery.addEventListener("levelchange", updateBattery);
+      });
+    } else {
+      document.getElementById("battery").textContent = "Battery: N/A on iOS Safari";
+    }
+  } catch (e) {
+    document.getElementById("battery").textContent = "Battery: N/A";
   }
 }
 
